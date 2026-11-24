@@ -64,11 +64,12 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://db.example.com:3306/book?useSSL=FALSE&serverTimezone=Asia/Shanghai");
+        dsc.setUrl(System.getenv().getOrDefault("BOOK_DB_URL",
+                "jdbc:mysql://localhost:3306/book?useSSL=FALSE&serverTimezone=Asia/Shanghai"));
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("***REMOVED***");
+        dsc.setUsername(System.getenv().getOrDefault("BOOK_DB_USERNAME", "root"));
+        dsc.setPassword(System.getenv().getOrDefault("BOOK_DB_PASSWORD", ""));
         mpg.setDataSource(dsc);
 
         // 包配置

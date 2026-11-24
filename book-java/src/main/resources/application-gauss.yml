@@ -1,0 +1,9 @@
+spring:
+  #  配置数据源
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    # url: jdbc:postgresql://db.example.com:26000/book?currentSchema=book
+    url: jdbc:postgresql://db.example.com:7654/book?currentSchema=book
+    username: ***REMOVED***
+    password: ***REMOVED***
+    # password: ***REMOVED***

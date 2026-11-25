@@ -20,6 +20,8 @@ public interface BookService extends IService<Book> {
 
     boolean updateBook(Book reqData);
 
+    boolean removeBook(Integer bookId);
+
     boolean subOne(Integer bookId);
 
     int addAll(MultipartFile file);

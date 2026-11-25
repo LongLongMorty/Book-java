@@ -73,7 +73,10 @@ public class BookController {
     @DeleteMapping("/{id}")
     public ResultBody deleteBook(@PathVariable("id") Integer id) {
         UserUtils.checkPrivilege(Privilege.PRI_EDIT, "用户无权限修改数据");
-        bookService.removeById(id);
+        boolean flag = bookService.removeBook(id);
+        if (!flag) {
+            throw new BasicException(400, "删除书籍失败");
+        }
         return ResultBody.success("删除书籍成功");
     }
 

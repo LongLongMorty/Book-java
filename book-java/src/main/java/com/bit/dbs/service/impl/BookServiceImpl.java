@@ -4,6 +4,7 @@ import com.bit.dbs.entity.Book;
 import com.bit.dbs.entity.BorrowInfo;
 import com.bit.dbs.exception.BasicException;
 import com.bit.dbs.mapper.BookMapper;
+import com.bit.dbs.mapper.BorrowInfoMapper;
 import com.bit.dbs.service.BookService;
 import com.bit.dbs.vo.BookSearchReqData;
 import com.bit.dbs.vo.PageRspData;
@@ -31,6 +32,9 @@ import java.util.Objects;
  */
 @Service
 public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements BookService {
+
+    @Autowired
+    private BorrowInfoMapper borrowInfoMapper;
 
     @Override
     public PageRspData<Book> listByPage(Integer pageNum, Integer pageSize) {
@@ -66,6 +70,21 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
             throw new BasicException(400, "书籍不存在");
         }
         return this.updateById(reqData);
+    }
+
+    @Override
+    @Transactional
+    public boolean removeBook(Integer bookId) {
+        Book book = this.getById(bookId);
+        if (Objects.isNull(book)) {
+            throw new BasicException(400, "书籍不存在");
+        }
+        Number borrowCount = borrowInfoMapper.selectCount(
+                Wrappers.<BorrowInfo>lambdaQuery().eq(BorrowInfo::getBookId, bookId));
+        if (borrowCount != null && borrowCount.longValue() > 0) {
+            throw new BasicException(400, "该书籍仍有借阅记录，请先归还后再删除");
+        }
+        return this.removeById(bookId);
     }
 
     @Override

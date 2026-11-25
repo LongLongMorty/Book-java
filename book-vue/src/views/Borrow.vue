@@ -2,8 +2,8 @@
   <div class="">
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>图书借阅管理</el-breadcrumb-item>
-      <el-breadcrumb-item>图书借阅列表</el-breadcrumb-item>
+      <el-breadcrumb-item>书籍借阅服务</el-breadcrumb-item>
+      <el-breadcrumb-item>借阅记录</el-breadcrumb-item>
     </el-breadcrumb>
 
     <!--搜索-->
@@ -20,7 +20,7 @@
       <tr>
         <th>序号</th>
         <th>书名</th>
-        <th>借书时间</th>
+        <th>借阅时间</th>
         <th>用户</th>
         <th v-if="$root.$data.canEdit" style="width: 150px">操作</th>
       </tr>

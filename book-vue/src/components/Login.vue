@@ -5,7 +5,7 @@
       <div class="avatar_box">
         <img src="../assets/img/logo.png" alt=""/>
       </div>
-      <div id="title">图书管理系统</div>
+      <div id="title">数字化书籍服务系统</div>
       <!-- 登录表单区域 -->
       <el-form :model="loginForm" :rules="rules" ref="loginFormRef" label-width="0px" class="login_form">
         <!-- 用户名 -->

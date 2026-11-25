@@ -9,7 +9,7 @@
           src="../assets/img/logo.png"
           style="width: 50px; height: 50px;"
         />
-        <span>图书管理系统</span>
+        <span>数字化书籍服务系统</span>
       </div>
       <div class="right">
         <span>{{ $root.$data.userStatus.userName }}（{{ $root.$data.userStatus.roleName.replace(/（.*）$/, '') }}）</span>

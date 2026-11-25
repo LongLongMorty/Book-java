@@ -1,12 +1,12 @@
 spring:
   # 数据源连接信息一律通过环境变量提供，禁止在仓库内提交明文账号密码。
   # 示例（PowerShell）：
-  #   $env:BOOK_DB_URL="jdbc:mysql://<host>:3306/book?useSSL=FALSE&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true"
+  #   $env:BOOK_DB_URL="jdbc:mysql://<host>:3306/digital_book?useSSL=FALSE&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true"
   #   $env:BOOK_DB_USERNAME="<user>"
   #   $env:BOOK_DB_PASSWORD="<password>"
   # 也可在 book-java/src/main/resources/application-local.yml 中配置（该文件已被 .gitignore 忽略）。
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${BOOK_DB_URL:jdbc:mysql://localhost:3306/book?useSSL=FALSE&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    url: ${BOOK_DB_URL:jdbc:mysql://localhost:3306/digital_book?useSSL=FALSE&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
     username: ${BOOK_DB_USERNAME:root}
     password: ${BOOK_DB_PASSWORD:}

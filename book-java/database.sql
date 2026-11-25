@@ -52,7 +52,7 @@ END;
 SELECT *
 FROM SELECT_BOOK_FUNC(2, 2, '1', '1');
 
---借书前判断库存是否>=1 函数 返回值bool true-库存有 false-库存无
+--借阅前判断库存是否>=1 函数 返回值bool true-库存有 false-库存无
 CREATE OR REPLACE FUNCTION SELECT_STOCK_FUNC(IN bookID INTEGER, OUT status BOOLEAN)
 RETURN BOOLEAN
     AS
@@ -75,7 +75,7 @@ END;
 SELECT *
 FROM SELECT_STOCK_FUNC(1); --使用该函数的例子
 
---删除借书信息时 使书的库存加一 触发器
+--归还时 使书的库存加一 触发器
 CREATE OR REPLACE FUNCTION ADD_BOOK_STOCK_FUNC() RETURNS TRIGGER AS
 $$
 DECLARE

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h1 style="text-align: center; font-size: 40px; margin: 40px 0 70px;">书籍是人类进步的阶梯</h1>
+    <h1 style="text-align: center; font-size: 40px; margin: 40px 0 70px;">连接每一本书，服务每一位读者</h1>
     <div class="img-container">
       <img src="../assets/img/background.jpg" style="width: 60%;"/>
     </div>

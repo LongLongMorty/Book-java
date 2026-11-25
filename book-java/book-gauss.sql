@@ -1,14 +1,13 @@
-create database book owner fantastic;
+create database digital_book owner fantastic;
 
-\
-c book
+\c digital_book
 
-create schema book owner fantastic;
+create schema digital_book owner fantastic;
 
 -- 以上在命令行中以omm用户执行
 
 -- 以下在data studio中以fantastic用户执行
-set search_path to book;
+set search_path to digital_book;
 
 create table SPRING_SESSION
 (
@@ -148,8 +147,8 @@ create table r_role
 
 insert into r_role
 values
-    (1, '管理员（全部操作）'),
-    (2, '普通用户（仅查看）');
+    (1, '管理员'),
+    (2, '读者');
 
 -- privilege
 create table privilege

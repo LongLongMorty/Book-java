@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>book</artifactId>
+    <artifactId>digital-book-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>book</name>
     <description>book</description>
@@ -131,7 +131,7 @@
     </dependencies>
 
     <build>
-        <finalName>book</finalName>
+        <finalName>digital-book-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

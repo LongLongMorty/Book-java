@@ -68,7 +68,7 @@ Mock.mock(regUrl(MockBaseUrl+'/book'), "delete", (config) => {
 	});
 });
 
-//借书
+//借阅
 Mock.mock(regUrl(MockBaseUrl+'/borrow'), "post", (config) => {
 	console.log(config);
 	// 返回的数据

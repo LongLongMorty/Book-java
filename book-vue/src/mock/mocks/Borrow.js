@@ -1,6 +1,6 @@
 import {Mock,MockBaseUrl,regUrl} from "../mockBase"
 
-//获得借书列表
+//获得借阅列表
 Mock.mock(regUrl(MockBaseUrl+'/book/borrow/list'), (config) => {
 	console.log(config);
 	// 返回的数据
@@ -22,7 +22,7 @@ Mock.mock(regUrl(MockBaseUrl+'/book/borrow/list'), (config) => {
 	});
 });
 
-//还书
+//归还
 Mock.mock(regUrl(MockBaseUrl+'/book/borrow'),"delete", (config) => {
 	console.log(config);
 	// 返回的数据

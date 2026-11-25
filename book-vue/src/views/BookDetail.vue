@@ -3,8 +3,8 @@
     <!-- 面包屑导航区域 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>图书信息数据</el-breadcrumb-item>
-      <el-breadcrumb-item>图书详细信息</el-breadcrumb-item>
+      <el-breadcrumb-item>书籍信息</el-breadcrumb-item>
+      <el-breadcrumb-item>书籍详细信息</el-breadcrumb-item>
     </el-breadcrumb>
 
     <el-button v-if="$root.$data.canEdit && this.pageStatus === 0" type="primary" @click="addBookDetail">新 增

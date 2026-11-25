@@ -10,9 +10,9 @@ spring:
   # 取消默认增加映射，如 /error
   resources:
     add-mappings: false
-  # 激活哪个环境
+  # 激活哪个环境（本地数据库账号密码放在 application-local.yml）
   profiles:
-    active: gauss
+    active: mysql,local
   # 日期格式化
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -25,4 +25,4 @@ mybatis-plus:
 # 日志级别
 logging:
   level:
-    cn.edu.bit.dnd.mapper: warn
+    com.bit.dbs.mapper: warn

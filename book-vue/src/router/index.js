@@ -20,14 +20,14 @@ const routes = [
     path: "/books",
     hidden: true,
     component: Home,
-    name: '图书信息数据库',
+    name: '书籍数据中心',
     meta: {icon: 'fa fa-male'},
     children: [
       {
         path: '/list',
         hidden: true,
         component: (resolve) => require(['@/views/BookList'], resolve),
-        name: '图书列表'
+        name: '书籍列表'
       },
       {
         path: '/books/detail/:bookId',
@@ -39,14 +39,14 @@ const routes = [
     path: "/borrow",
     hidden: true,
     component: Home,
-    name: '图书借阅管理',
+    name: '书籍借阅服务',
     meta: {icon: 'fa fa-dog'},
     children: [
       {
         path: '/borrow',
         hidden: true,
         component: (resolve) => require(['@/views/Borrow'], resolve),
-        name: '图书借阅列表'
+        name: '借阅记录'
       }
     ]
   },

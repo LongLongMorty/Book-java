@@ -10,6 +10,10 @@ const routes = [
   {path: "/", redirect: "/login"},
   {path: "/login", component: Login},
   {
+    path: "/dashboard",
+    component: (resolve) => require(['@/views/Dashboard'], resolve)
+  },
+  {
     path: "/home", component: Home,
     redirect: '/welcome',
     children: [

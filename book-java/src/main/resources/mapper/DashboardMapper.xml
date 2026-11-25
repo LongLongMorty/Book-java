@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bit.dbs.mapper.DashboardMapper">
+
+    <select id="countBooks" resultType="java.lang.Long">
+        select count(*) from book
+    </select>
+
+    <select id="sumStock" resultType="java.lang.Long">
+        select coalesce(sum(stock), 0) from book
+    </select>
+
+    <select id="countBorrows" resultType="java.lang.Long">
+        select count(*) from borrow_info
+    </select>
+
+    <select id="countUsers" resultType="java.lang.Long">
+        select count(*) from u_user
+    </select>
+
+    <select id="countTodayActions" resultType="java.lang.Long">
+        select count(*) from user_log where action_time &gt;= curdate()
+    </select>
+
+    <select id="selectBorrowTrend" resultType="com.bit.dbs.vo.DashboardData$TrendPoint">
+        select date_format(from_unixtime(borrow_time / 1000), '%Y-%m-%d') as `date`,
+               count(*) as `count`
+        from borrow_info
+        where from_unixtime(borrow_time / 1000) &gt;= date_sub(curdate(), interval 13 day)
+        group by date_format(from_unixtime(borrow_time / 1000), '%Y-%m-%d')
+        order by date_format(from_unixtime(borrow_time / 1000), '%Y-%m-%d')
+    </select>
+
+    <select id="selectTopBooks" resultType="com.bit.dbs.vo.DashboardData$NameValue">
+        select book_name as `name`, count(*) as `value`
+        from borrow_info
+        group by book_id, book_name
+        order by `value` desc, book_id asc
+        limit 8
+    </select>
+
+    <select id="selectStockTop" resultType="com.bit.dbs.vo.DashboardData$NameValue">
+        select book_name as `name`, stock as `value`
+        from book
+        order by stock desc, book_id asc
+        limit 8
+    </select>
+
+    <select id="selectRoleDistribution" resultType="com.bit.dbs.vo.DashboardData$NameValue">
+        select r.role_name as `name`, count(*) as `value`
+        from user_role ur
+        join r_role r on ur.role_id = r.role_id
+        group by r.role_id, r.role_name
+        order by `value` desc
+    </select>
+
+    <select id="selectActionDistribution" resultType="com.bit.dbs.vo.DashboardData$NameValue">
+        select case action_type
+                   when 1 then '新增'
+                   when 2 then '修改'
+                   when 3 then '删除'
+                   when 4 then '上传'
+                   when 5 then '登录'
+                   when 6 then '退出'
+                   else '其他'
+               end as `name`,
+               count(*) as `value`
+        from user_log
+        group by action_type
+        order by `value` desc
+    </select>
+
+    <select id="selectRecentLogs" resultType="com.bit.dbs.vo.DashboardData$RecentLog">
+        select date_format(action_time, '%Y-%m-%d %H:%i:%s') as `time`,
+               user_name as `userName`,
+               description
+        from user_log
+        order by action_time desc
+        limit 8
+    </select>
+
+</mapper>

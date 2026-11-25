@@ -11,6 +11,7 @@
         </div>
       </div>
       <div class="right">
+        <router-link class="dash-entry" to="/dashboard">数据大屏</router-link>
         <span class="user-name">{{ $root.$data.userStatus.userName }}（{{ $root.$data.userStatus.roleName.replace(/（.*）$/, '') }}）</span>
         <el-dropdown @command="neDropdown">
           <span class="el-dropdown-link more-link">
@@ -228,6 +229,20 @@ export default {
   gap: 18px;
   color: var(--ink-2);
   font-size: 13px;
+}
+
+.dash-entry {
+  padding: 5px 10px;
+  color: var(--ink-2);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  border: 1px solid var(--line-strong);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.dash-entry:hover {
+  color: var(--cinnabar);
+  border-color: var(--cinnabar);
 }
 
 .user-name {

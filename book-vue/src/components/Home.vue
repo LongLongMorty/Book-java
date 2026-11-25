@@ -71,7 +71,7 @@
         </el-main>
 
         <el-footer class="site-footer">
-          <span>Copyright © 2022 BIT · 数字化书籍服务系统</span>
+          <span>Copyright © 2026 BIT · 数字化书籍服务系统</span>
         </el-footer>
 
       </el-container>

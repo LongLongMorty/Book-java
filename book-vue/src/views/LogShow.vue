@@ -11,7 +11,7 @@
         <el-button type="primary" @click="exportTotalToExcel">导出全部日志数据</el-button>
         <!--  日志列表  -->
         <el-table border stripe :data="infoList">
-            <el-table-column prop="actionTime" label="操作时间" width="150px"></el-table-column>
+            <el-table-column prop="actionTime" label="操作时间" width="170px"></el-table-column>
             <el-table-column prop="userName" label="操作人"></el-table-column>
             <el-table-column prop="roleName" label="角色"></el-table-column>
             <el-table-column label="操作类型">

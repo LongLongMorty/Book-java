@@ -641,7 +641,22 @@ button:focus-visible,
   letter-spacing: 0.06em;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
+  .page-table--books th:nth-child(1),
+  .page-table--books td:nth-child(1),
+  .page-table--books th:nth-child(4),
+  .page-table--books td:nth-child(4),
+  .page-table--borrow th:nth-child(1),
+  .page-table--borrow td:nth-child(1) {
+    display: none;
+  }
+
+  .table-scroll .page-table {
+    min-width: 520px;
+  }
+}
+
+@media (max-width: 640px) {
   .page-toolbar {
     align-items: stretch;
   }

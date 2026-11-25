@@ -1,9 +1,12 @@
 package com.bit.dbs.config;
 
+import com.bit.dbs.utils.UploadUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.io.File;
 
 /**
  * @author fanhongtao
@@ -23,9 +26,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .maxAge(3600);
     }
 
-    //添加静态资源映射
+    //添加静态资源映射：上传目录 + classpath 内置静态资源
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**/*.png", "/static/**/*.jpg", "static/**/*.mp4").addResourceLocations("classpath:/static/");
+        String uploadLocation = new File(UploadUtils.getUploadRoot(), "static").toURI().toString();
+        if (!uploadLocation.endsWith("/")) {
+            uploadLocation += "/";
+        }
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations(uploadLocation, "classpath:/static/");
     }
 }

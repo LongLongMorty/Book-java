@@ -16,3 +16,6 @@ Thumbs.db
 target/
 dist/
 node_modules/
+
+# 运行时上传文件
+uploads/

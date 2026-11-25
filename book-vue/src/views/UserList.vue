@@ -19,7 +19,7 @@
     </tr>
 </table>
 </div>
-<el-dialog title="新增用户" :visible.sync="dialogAddOpened" width="50%" :close-on-click-modal="false" @closed="dialogAddClosed">
+<el-dialog title="新增用户" :visible.sync="dialogAddOpened" width="50%" append-to-body :close-on-click-modal="false" @closed="dialogAddClosed">
     <el-form :model="formAdd" :rules="formAddRules" ref="refAdd" label-width="120px">
         <el-form-item label="用户名" prop="username"><el-input v-model="formAdd.username"></el-input></el-form-item>
         <el-form-item label="初始密码" prop="pw"><el-input v-model="formAdd.pw" show-password></el-input></el-form-item>

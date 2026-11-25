@@ -84,7 +84,7 @@
     </el-pagination>
 
     <!--新增-->
-    <el-dialog title="新增书籍" :visible.sync="dialogAddBookOpened" width="40%" :close-on-click-modal="false"
+    <el-dialog title="新增书籍" :visible.sync="dialogAddBookOpened" width="40%" append-to-body :close-on-click-modal="false"
                @closed="dialogAddBookClosed">
       <el-form :model="formAddBook" :rules="formBookRules" ref="refAddBook" label-width="120px">
         <el-form-item label="书名" prop="bookName">
@@ -106,7 +106,7 @@
       </span>
     </el-dialog>
 
-    <el-dialog title="修改书籍信息" :visible.sync="dialogEditBookOpened" width="40%" :close-on-click-modal="false">
+    <el-dialog title="修改书籍信息" :visible.sync="dialogEditBookOpened" width="40%" append-to-body :close-on-click-modal="false">
       <el-form :model="formEditBook" :rules="formBookRules" ref="refEditBook" label-width="120px">
         <el-form-item label="书名" prop="bookName">
           <el-input v-model.trim="formEditBook.bookName"></el-input>

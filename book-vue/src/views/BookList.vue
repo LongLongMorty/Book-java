@@ -6,32 +6,27 @@
       <el-breadcrumb-item>书籍数据中心</el-breadcrumb-item>
       <el-breadcrumb-item>书籍列表</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-row>
-      <el-col span=2>
+    <div class="page-toolbar">
+      <div class="toolbar-actions">
         <el-button v-if="$root.$data.canEdit" type=primary @click="dialogAddBookOpened = true">新增</el-button>
-      </el-col>
-      <el-col span=20>
-        <!--搜索-->
-        <el-form :inline="true" :model="query" ref="refSearch" label-width="80px">
-          <el-form-item label="书籍名称" prop="bookName">
-            <el-input v-model.trim="query.bookName"></el-input>
-          </el-form-item>
-          <el-form-item label="作者名称" prop="bookAuthor">
-            <el-input v-model.trim="query.bookAuthor"></el-input>
-          </el-form-item>
-          <el-button type=success @click="searchByParams">搜索</el-button>
-        </el-form>
-      </el-col>
-      <el-col span=2>
-        <template>
-          <upload button-txt="批量上传" v-if="$root.$data.canEdit" path="/book/"
-                  :urlPath="'/book/upload'"
-                  style="width: 60%;" @uploadSuccess="handleFileUploadSuccess">
-          </upload>
-        </template>
-      </el-col>
-    </el-row>
-    <table v-if="bookList.length > 0" class="page-table full-width center">
+        <upload button-txt="批量上传" v-if="$root.$data.canEdit" path="/book/"
+                :urlPath="'/book/upload'"
+                @uploadSuccess="handleFileUploadSuccess">
+        </upload>
+      </div>
+      <!--搜索-->
+      <el-form :inline="true" :model="query" ref="refSearch" class="toolbar-search">
+        <el-form-item prop="bookName">
+          <el-input v-model.trim="query.bookName" placeholder="书籍名称"></el-input>
+        </el-form-item>
+        <el-form-item prop="bookAuthor">
+          <el-input v-model.trim="query.bookAuthor" placeholder="作者名称"></el-input>
+        </el-form-item>
+        <el-button type=success @click="searchByParams">搜索</el-button>
+      </el-form>
+    </div>
+    <div v-if="bookList.length > 0" class="table-scroll">
+    <table class="page-table page-table--books full-width center">
       <tr>
         <th>序号</th>
         <th>书名</th>
@@ -75,6 +70,12 @@
         </td>
       </tr>
     </table>
+    </div>
+    <div v-if="bookList.length === 0" class="empty-state">
+      <span class="empty-seal" aria-hidden="true">阅</span>
+      <p class="empty-title">暂无书籍</p>
+      <p class="empty-hint">调整搜索条件，或新增一本书</p>
+    </div>
     <!-- 分页 -->
     <el-pagination v-if="bookList.length > 0" background @size-change="handleSizeChange"
                    @current-change="handleCurrentChange"
@@ -315,48 +316,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-table .el-button {
-  margin-bottom: 0;
-}
-
-#detail img {
-  width: 260px;
-}
-
-.link-data {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.el-ue {
-  line-height: normal;
-}
-
 .page-table .el-button {
   margin: 3px 5px !important;
 }
-
-.test-result a {
-  margin: 5px 25px;
-  /* 取消下划线 */
-  text-decoration: none;
-  /* 取消选中时的背景色 */
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  // color: #06F;
-  cursor: pointer;
-}
-
-/* 已读时的字体颜色 */
-.test-result a {
-  color: #06F;
-  text-decoration: none;
-}
-
-/* 未访问的链接 */
-.test-result a:hover {
-  color: #F00;
-  text-decoration: underline;
-}
-
-/* 鼠标移动到链接上 */
 </style>

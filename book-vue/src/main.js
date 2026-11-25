@@ -37,6 +37,7 @@ Vue.prototype.$http = axios
 /* 导入全局样式 */
 import './assets/css/global.css'
 import './assets/css/common.css'
+import './assets/css/theme.css'
 import './assets/js/fontawesome-free-5.15.4.min.js'
 
 Vue.config.productionTip = false

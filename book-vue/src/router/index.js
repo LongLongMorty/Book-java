@@ -21,7 +21,7 @@ const routes = [
     hidden: true,
     component: Home,
     name: '书籍数据中心',
-    meta: {icon: 'fa fa-male'},
+    meta: {icon: 'el-icon-reading'},
     children: [
       {
         path: '/list',
@@ -40,7 +40,7 @@ const routes = [
     hidden: true,
     component: Home,
     name: '书籍借阅服务',
-    meta: {icon: 'fa fa-dog'},
+    meta: {icon: 'el-icon-s-order'},
     children: [
       {
         path: '/borrow',
@@ -69,7 +69,7 @@ const routes = [
     hidden: true,
     component: Home,
     name: '系统管理',
-    meta: {icon: 'fa fa-cog'},
+    meta: {icon: 'el-icon-setting'},
     children: [
       {
         path: "/userlist",

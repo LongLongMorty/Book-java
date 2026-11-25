@@ -7,16 +7,17 @@
     </el-breadcrumb>
 
     <!--搜索-->
-    <el-form :inline="true" :model="query" ref="refSearch" label-width="80px">
-      <el-form-item label="书籍名称" prop="bookName">
-        <el-input v-model.trim="query.bookName"></el-input>
+    <el-form :inline="true" :model="query" ref="refSearch" class="page-toolbar page-toolbar--form">
+      <el-form-item prop="bookName">
+        <el-input v-model.trim="query.bookName" placeholder="书籍名称"></el-input>
       </el-form-item>
-      <el-form-item label="用户名称" prop="bookAuthor">
-        <el-input v-model.trim="query.userName"></el-input>
+      <el-form-item prop="bookAuthor">
+        <el-input v-model.trim="query.userName" placeholder="用户名称"></el-input>
       </el-form-item>
       <el-button type=success @click="searchByParams">搜索</el-button>
     </el-form>
-    <table v-if="borrowInfoList.length > 0" class="page-table full-width center">
+    <div v-if="borrowInfoList.length > 0" class="table-scroll">
+    <table class="page-table page-table--borrow full-width center">
       <tr>
         <th>序号</th>
         <th>书名</th>
@@ -38,6 +39,12 @@
         </td>
       </tr>
     </table>
+    </div>
+    <div v-if="borrowInfoList.length === 0" class="empty-state">
+      <span class="empty-seal" aria-hidden="true">阅</span>
+      <p class="empty-title">暂无借阅记录</p>
+      <p class="empty-hint">从「书籍列表」选择一本书，开始一次借阅</p>
+    </div>
 
     <!-- 分页 -->
     <el-pagination v-if="borrowInfoList.length > 0" background @size-change="handleSizeChange"
@@ -152,48 +159,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-table .el-button {
-  margin-bottom: 0;
-}
-
-#detail img {
-  width: 260px;
-}
-
-.link-data {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.el-ue {
-  line-height: normal;
-}
-
 .page-table .el-button {
   margin: 3px 5px !important;
 }
-
-.test-result a {
-  margin: 5px 25px;
-  /* 取消下划线 */
-  text-decoration: none;
-  /* 取消选中时的背景色 */
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  // color: #06F;
-  cursor: pointer;
-}
-
-/* 已读时的字体颜色 */
-.test-result a {
-  color: #06F;
-  text-decoration: none;
-}
-
-/* 未访问的链接 */
-.test-result a:hover {
-  color: #F00;
-  text-decoration: underline;
-}
-
-/* 鼠标移动到链接上 */
 </style>

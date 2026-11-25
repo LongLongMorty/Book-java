@@ -2,21 +2,20 @@
   <!-- 页面容器布局 -->
   <el-container class="home-container">
     <!-- 页面头部 -->
-    <el-header>
-      <div>
-        <!-- 头像 -->
-        <img
-          src="../assets/img/logo.png"
-          style="width: 50px; height: 50px;"
-        />
-        <span>数字化书籍服务系统</span>
+    <el-header class="site-header">
+      <div class="brand">
+        <span class="brand-seal" aria-hidden="true">书</span>
+        <div class="brand-text">
+          <span class="brand-name">数字化书籍服务系统</span>
+          <span class="brand-sub">DIGITAL BOOK SERVICE</span>
+        </div>
       </div>
       <div class="right">
-        <span>{{ $root.$data.userStatus.userName }}（{{ $root.$data.userStatus.roleName.replace(/（.*）$/, '') }}）</span>
+        <span class="user-name">{{ $root.$data.userStatus.userName }}（{{ $root.$data.userStatus.roleName.replace(/（.*）$/, '') }}）</span>
         <el-dropdown @command="neDropdown">
-                    <span class="el-dropdown-link">
-                        更多<i class="el-icon-arrow-down el-icon--right"></i>
-                    </span>
+          <span class="el-dropdown-link more-link">
+            更多<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="pw">修改密码</el-dropdown-item>
             <el-dropdown-item v-if="$root.$data.canEdit" command="list">用户管理</el-dropdown-item>
@@ -25,32 +24,25 @@
         </el-dropdown>
       </div>
     </el-header>
-    <el-container>
-      <!-- 页面侧边栏 -->
-      <el-aside :width="isCollapse ? '64px' : '270px'">
+
+    <el-container class="body-container">
+      <!-- 页面侧边栏：书脊 -->
+      <el-aside :width="isCollapse ? '64px' : '270px'" class="site-aside">
         <!-- 折叠标志 -->
         <div class="menu_collapse" @click="isCollapse = !isCollapse">
-          |||
+          {{ isCollapse ? '展' : '收' }}
         </div>
         <!-- 菜单导航 -->
-        <el-menu class="el-menu-vertical-demo" unique-opened
+        <el-menu class="site-menu" unique-opened
                  @open="handleOpen" @close="handleClose"
-                 background-color="#333744" text-color="#fff"
-                 active-text-color="#409EFF" :collapse="isCollapse"
-                 :collapse-transition="false" router
-                 :default-active="this.$route.path"
+                 :collapse="isCollapse" :collapse-transition="false" router
+                 :default-active="$route.path"
                  @select="handleSelect">
-          <!-- 一级菜单
-              开启路由模式，会将index作为访问路径
-              menuList中的项，它的path值，并不是以 / 开头的
-          -->
           <el-submenu :index="menu1.path" v-for="(menu1, index) in menuList"
                       :key="menu1.name + index" v-if="menu1.path !== '/sys' || $root.$data.canEdit">
             <!-- 一级菜单模板区 -->
             <template slot="title">
-              <!-- 图标 -->
               <i :class="menu1.meta.icon" class="menu-icon"></i>
-              <!-- 文本 -->
               <span v-text="menu1.name"></span>
             </template>
 
@@ -61,9 +53,7 @@
                 v-for="(menu2, index) in menu1.children"
                 :key="menu2.name + index"
                 v-if="menu2.hidden">
-                <!-- 图标 -->
-                <i class="el-icon-menu"></i>
-                <!-- 文本 -->
+                <span class="menu-dot" aria-hidden="true"></span>
                 <span>{{ menu2.name }}</span>
               </el-menu-item>
             </template>
@@ -71,16 +61,17 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-container>
-        <!-- 页面主体区域 -->
-        <el-main>
-          <!-- Main -->
-          <!-- 路由占位符 -->
-          <router-view></router-view>
+
+      <el-container class="content-container">
+        <!-- 页面主体区域：册页 -->
+        <el-main class="site-main">
+          <div class="page-shell">
+            <router-view></router-view>
+          </div>
         </el-main>
 
-        <el-footer>
-          <span>Copyright © 2022 BIT</span>
+        <el-footer class="site-footer">
+          <span>Copyright © 2022 BIT · 数字化书籍服务系统</span>
         </el-footer>
 
       </el-container>
@@ -165,80 +156,252 @@ export default {
 <style lang='less' scoped>
 .home-container {
   height: 100%;
+  background: var(--paper);
 }
 
-/* 侧边栏背景 */
-.el-aside {
-  background-color: #333744;
-  /* 去除原有边框，二级菜单比有边界线突出 */
-
-  .el-menu {
-    border-right: none;
-  }
-}
-
-/* 标题栏样式 */
-.el-header {
-  background-color: #24242c;
+/* 顶栏 */
+.site-header {
+  flex: 0 0 72px;
+  height: 72px !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 5px;
-  color: white;
-  font-size: 20px;
-
-  > div {
-    display: flex;
-    align-items: center;
-
-    span {
-      margin-left: 15px;
-    }
-  }
-
-  .right {
-    font-size: 14px;
-
-    .el-dropdown {
-      color: #dad9da;
-
-    }
-  }
+  padding: 0 28px;
+  background: linear-gradient(180deg, #fbf7ee, #f4eee2);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  z-index: 3;
 }
 
-/* 主体区域背景 */
-.el-main {
-  background-color: #eaedf1;
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: rgba(185, 169, 142, 0.45);
 }
 
-.el-footer {
-  background-color: #eaedf1;
-  height: 30px !important;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-seal {
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  color: var(--cinnabar);
+  font-family: var(--kai);
+  font-size: 24px;
+  border: 2px solid var(--cinnabar);
+  transform: rotate(-4deg);
+  opacity: 0.9;
 }
 
-/* 图标和文字间距 */
-.iconfont {
-  margin-right: 10px;
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-/* 菜单折叠标志的样式 */
-.menu_collapse {
-  background-color: #4a5064;
-  text-align: center;
-  letter-spacing: 0.2em;
-  font-size: 10px;
-  line-height: 24px;
-  color: #eeee;
+.brand-name {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 21px;
+  letter-spacing: 0.16em;
+}
+
+.brand-sub {
+  color: var(--ink-3);
+  font-size: 9px;
+  letter-spacing: 0.34em;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.user-name {
+  font-family: var(--serif);
+  letter-spacing: 0.06em;
+}
+
+.user-name::before {
+  content: "·";
+  margin-right: 8px;
+  color: var(--cinnabar);
+}
+
+.more-link {
+  color: var(--ink-2);
   cursor: pointer;
+  transition: color 0.15s ease;
 }
 
-/* 菜单项前边的图标 */
+.more-link:hover {
+  color: var(--cinnabar);
+}
+
+.body-container {
+  flex: 1;
+  min-height: 0;
+}
+
+/* 侧栏：书脊 */
+.site-aside {
+  position: relative;
+  background: var(--paper-3);
+  border-right: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.site-aside::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, rgba(96, 76, 46, 0.02) 0, rgba(96, 76, 46, 0.02) 1px, transparent 1px, transparent 5px);
+  pointer-events: none;
+}
+
+.menu_collapse {
+  position: relative;
+  z-index: 1;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  color: var(--ink-2);
+  font-family: var(--serif);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu_collapse:hover {
+  color: var(--cinnabar);
+}
+
+.site-menu {
+  position: relative;
+  z-index: 1;
+  height: calc(100% - 34px);
+  overflow-y: auto;
+  border-right: none;
+  background: transparent;
+}
+
+.site-menu ::v-deep .el-submenu__title,
+.site-menu ::v-deep .el-menu-item {
+  height: 48px;
+  line-height: 48px;
+  color: var(--ink-2);
+  font-family: var(--serif);
+  letter-spacing: 0.1em;
+  background: transparent;
+}
+
+.site-menu ::v-deep .el-submenu__title:hover,
+.site-menu ::v-deep .el-menu-item:hover {
+  color: var(--cinnabar);
+  background: rgba(163, 59, 43, 0.05);
+}
+
+.site-menu ::v-deep .el-menu-item.is-active {
+  color: var(--cinnabar);
+  background: rgba(163, 59, 43, 0.08);
+}
+
+.site-menu ::v-deep .el-menu-item.is-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  background: var(--cinnabar);
+}
+
+.site-menu ::v-deep .el-submenu .el-menu-item {
+  min-width: 0;
+  padding-left: 48px !important;
+  background: transparent;
+}
+
+.site-menu ::v-deep .el-menu--inline {
+  background: transparent;
+}
+
 .menu-icon {
-  margin-right: 5px;
-  width: 12px;
+  width: 16px;
+  margin-right: 10px;
+  color: var(--gold);
+  font-size: 15px;
+}
+
+.site-menu ::v-deep .el-menu-item.is-active .menu-icon,
+.site-menu ::v-deep .el-submenu.is-active .menu-icon {
+  color: var(--cinnabar);
+}
+
+.menu-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.85;
+}
+
+/* 主体 */
+.site-main {
+  padding: 26px 30px 18px;
+  background: transparent;
+  overflow: auto;
+}
+
+.site-footer {
+  flex: 0 0 34px;
+  height: 34px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-3);
+  font-family: var(--serif);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    padding: 0 14px;
+  }
+
+  .site-main {
+    padding: 14px 12px 12px;
+  }
+}
+
+@media (max-width: 760px) {
+  .brand-name {
+    font-size: 17px;
+    letter-spacing: 0.08em;
+  }
+
+  .brand-sub,
+  .user-name {
+    display: none;
+  }
 }
 </style>

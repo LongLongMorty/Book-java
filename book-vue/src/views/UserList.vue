@@ -5,7 +5,8 @@
     <el-breadcrumb-item>用户管理</el-breadcrumb-item>
 </el-breadcrumb>
 <el-button type=primary @click="dialogAddOpened=true">新增</el-button>
-<table class="page-table full-width center">
+<div class="table-scroll">
+<table class="page-table page-table--users full-width center">
     <tr><th>用户名</th><th>用户身份</th><th>操作</th></tr>
     <tr v-for="user in users" :key="user.userId">
         <td>{{user.userName}}</td>
@@ -17,6 +18,7 @@
         </td>
     </tr>
 </table>
+</div>
 <el-dialog title="新增用户" :visible.sync="dialogAddOpened" width="50%" :close-on-click-modal="false" @closed="dialogAddClosed">
     <el-form :model="formAdd" :rules="formAddRules" ref="refAdd" label-width="120px">
         <el-form-item label="用户名" prop="username"><el-input v-model="formAdd.username"></el-input></el-form-item>

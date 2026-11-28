@@ -86,6 +86,12 @@ const routes = [
         hidden: true,
         component: (resolve) => require(['@/views/LogShow'], resolve),
         name: '登录日志管理'
+      },
+      {
+        path: "/backup",
+        hidden: true,
+        component: (resolve) => require(['@/views/Backup'], resolve),
+        name: '数据备份'
       }
     ]
   },

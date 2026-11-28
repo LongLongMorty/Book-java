@@ -26,3 +26,12 @@ mybatis-plus:
 logging:
   level:
     com.bit.dbs.mapper: warn
+
+book:
+  backup:
+    dir: ${BOOK_BACKUP_DIR:./backup}
+    mysqldump: ${BOOK_MYSQLDUMP:mysqldump}
+    mysql: ${BOOK_MYSQL:mysql}
+    # 可选：仅用于恢复的账号。MySQL 开启 binlog 时，恢复触发器需要 SUPER 权限。
+    restore-username: ${BOOK_BACKUP_RESTORE_USER:}
+    restore-password: ${BOOK_BACKUP_RESTORE_PASSWORD:}
